@@ -55,5 +55,8 @@
     <Compile Include="Window\INotifyWindow.cs" />
     <Compile Include="Window\NotifyWindow.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Diagram.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
