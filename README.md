@@ -26,7 +26,9 @@ _____
 
 **Установка**
 
-1. Добавьте в свой проект папку "D35YNC.Notifications".
+  * Добавьте в свой проект папку "D35YNC.Notifications".
+  * Или
+  * NuGet: Install-Package D35YNC.Notifications -Version 1.2.0
 
 **Использование**
 
@@ -117,8 +119,9 @@ File                          |Content
 
 **Installation**
 
-1. Add folder "D35YNC.Notifications" to your project
-
+  * Add folder "D35YNC.Notifications" to your project
+  * Or
+  * NuGet: Install-Package D35YNC.Notifications -Version 1.2.0
 **Usage**
 
 NotifyController has 2 overloads of the Method ShowNotify(..)
