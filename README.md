@@ -122,6 +122,7 @@ File                          |Content
   * Add folder "D35YNC.Notifications" to your project
   * Or
   * NuGet: Install-Package D35YNC.Notifications -Version 1.2.0
+  
 **Usage**
 
 NotifyController has 2 overloads of the Method ShowNotify(..)
