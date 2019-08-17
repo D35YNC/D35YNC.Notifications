@@ -195,7 +195,7 @@ _____
 ### `RU`
 <a name="Changes_RU"/>
 
-Version 1.2:
+Version 1.2.1:
   * Bug fixed в Config.Style.AutoHeight. Раньше окна вели себя странно при свойстве = true.
 
 Version 1.2:
@@ -220,6 +220,9 @@ Version 1.0:
 
 ### `EN`
 <a name="Changes_EN"/>
+
+Version 1.2.1:
+  * Bug fixed in Config.Style.AutoHeight. Previously, Windows behaved strangely with the property = true.
 
 Version 1.2:
   * Added:
