@@ -126,36 +126,37 @@ namespace D35YNC.Notifications
             {
                 case NotifyPosition.TopLeft:
                     {
-                        int top = Config.Padding;
+                        double top = Config.Padding;
                         
                         foreach (Window window in NotifyList)
                         {                            
                             window.Top = top;
-                            top += (int)window.Height + Config.Padding;
+                            top += (window.Height + Config.Padding);
                             window.Left = 0;
                         }
                         break;
                     }
                 case NotifyPosition.TopRight:
                     {
-                        int top = Config.Padding;
-                        int left = (int)SystemParameters.WorkArea.Width;
+                        double top = Config.Padding;
+                        double left = SystemParameters.WorkArea.Width;
 
                         foreach (Window window in NotifyList)
                         {
                             window.Top = top;
-                            top += (int)window.Height + Config.Padding;
+                            top += (window.Height + Config.Padding);
                             window.Left = left - window.Width;
                         }
                         break;
                     }
                 case NotifyPosition.BottomLeft:
                     {
-                        int top = (int)SystemParameters.WorkArea.Height;
+                        double top = SystemParameters.WorkArea.Height;
 
                         foreach (Window window in NotifyList)
                         {
-                            top -= (int)window.Height + Config.Padding;
+                            double a = window.Height;
+                            top -= (window.Height + Config.Padding);
                             window.Top = top;
                             window.Left = 0;
                         }
@@ -163,12 +164,12 @@ namespace D35YNC.Notifications
                     }
                 case NotifyPosition.BottomRight:
                     {
-                        int top = (int)SystemParameters.WorkArea.Height;
-                        int left = (int)SystemParameters.WorkArea.Width;
+                        double top = SystemParameters.WorkArea.Height;
+                        double left = SystemParameters.WorkArea.Width;
 
                         foreach (Window window in NotifyList)
                         {
-                            top -= (int)window.Height + Config.Padding;
+                            top -= (window.Height + Config.Padding);
                             window.Top = top;
                             window.Left = left - window.Width;
                         }

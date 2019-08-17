@@ -62,22 +62,19 @@ namespace D35YNC.Notifications
             this.WindowStyle = WindowStyle.None;
             this.Background = new SolidColorBrush(Colors.Transparent);
             this.AllowsTransparency = true;
-
             this.ShowInTaskbar = false;
             this.ResizeMode = ResizeMode.NoResize;
             this.Focusable = false;
             this.Loaded += Window_Loaded;
 
             this.Width = Style.Width;
-            if (!Style.AutoHeight)
-            {
-                this.Height = Style.Height;                
-            }
-            else
+            this.Height = Style.Height;
+            if (Style.AutoHeight)
             {
                 this.SizeToContent = SizeToContent.Height;
             }
             #endregion
+
             #region Controlls initialization
             _Border = new Border
             {
@@ -108,8 +105,10 @@ namespace D35YNC.Notifications
                 TextWrapping = TextWrapping.Wrap
             };
 
-            _StackPanel = new StackPanel();
-            _StackPanel.Orientation = Orientation.Vertical;            
+            _StackPanel = new StackPanel
+            {
+                Orientation = Orientation.Vertical
+            };
 
             IAddChild container = _StackPanel;
             container.AddChild(_HeaderBlock);

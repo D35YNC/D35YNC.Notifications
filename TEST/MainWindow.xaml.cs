@@ -23,9 +23,9 @@ namespace TEST
 
             NotifyController.Config.Style.Foreground = new SolidColorBrush(Colors.Lime);
             NotifyController.Config.Style.Background = new SolidColorBrush(Colors.Black);
-
+            NotifyController.Config.Style.AutoHeight = true;
             NotifyController.Config.Behavior.HideAnimation = NotifyAnimation.Transparent;
-
+            NotifyController.Config.Behavior.Position = NotifyPosition.BottomLeft;
             NotifyController.AddNotifyType((int)NotifyType.Default, "Обычный заголовок", 2500);
             NotifyController.AddNotifyType((int)NotifyType.Error, "Заголовок ошибки", 4000);
         }

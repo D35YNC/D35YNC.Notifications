@@ -10,7 +10,7 @@ namespace D35YNC.Notifications
     public class NotifyBehavior
     {
         /// <summary>
-        /// Позиция уведомления на экране.
+        /// Расположение уведомлений на экране.
         /// </summary>
         public NotifyPosition Position { get; set; } = NotifyPosition.BottomRight;
 
