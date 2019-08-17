@@ -1,4 +1,4 @@
-# D35YNC.Notifications<Ver. 1.2>
+# D35YNC.Notifications<Ver. 1.2.1>
 
 Простая (почти) библиотека pop-up уведомлений.
 
@@ -194,6 +194,9 @@ _____
 
 ### `RU`
 <a name="Changes_RU"/>
+
+Version 1.2:
+  * Bug fixed в Config.Style.AutoHeight. Раньше окна вели себя странно при свойстве = true.
 
 Version 1.2:
   * Добавлено:
