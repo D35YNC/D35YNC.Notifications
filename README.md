@@ -1,4 +1,4 @@
-# D35YNC.Notifications<Ver. 1.2.1>
+# D35YNC.Notifications<Version. 1.2.2>
 
 Простая (почти) библиотека pop-up уведомлений.
 
@@ -65,37 +65,32 @@ new NotifyWindow(NotifyStyle, NotifyBehavior) { Header.., Text.., Timeout.., Ani
     Error
   }
   ...
-  class SomeClass()
+  NotifyController NotifyController;
+  ...
+  public SomeConstructor()
   {
-    public NotifyController { get; set; }
-    
-    public SomeClass()
-    {
       NotifyController = new NotifyController();
-
+      
       NotifyController.Config.Style.Foreground = new SolidColorBrush(Colors.Lime);
       NotifyController.Config.Style.Background = new SolidColorBrush(Colors.Black);
-      
-      NotifyController.Config.Behavior.HideAnimation = NotifyAnimation.Transparent;
 
-      NotifyController.AddNotifyType((int)NotifyType.Default, "Обычный заголовок", 2500);
-      NotifyController.AddNotifyType((int)NotifyType.Error, "Заголовок ошибки", 4000);
-    }
-    ...
-    public SomeCallingMethod()
-    {
+      NotifyController.Config.Behavior.ShowAnimation = NotifyAnimation.Slide;
+
+      NotifyController.AddNotifyType((int)NotifyType.Default, "Это уведомление вызвано первым", 2500);
+  }
+  ...
+  public SomeCallMethod(object sender, RoutedEventArgs e)
+  {
+      NotifyController.ShowNotify((int)NotifyType.Default, "У него Timeout = 2500 и стандартный AnimationTimeout");
+    
       NotifyController.ShowNotify(new NotifyWindow(NotifyController.Config.Style, NotifyController.Config.Behavior)
       {
-        Header           = "Привет!",
-        Text             = "Могу создать уведомление вот так",
-        Timeout          = 5000,
-        AnimationTimeout = 400
+          Header = "Это уведомление вызвано вторым",
+          Text = "У него Timeout = 5000 и AnimationTimeout = 400",
+          Timeout = 5000,
+          AnimationTimeout = 400
       });
-      
-      NotifyController.ShowNotify((int)NotifyType.Default, "И с использованием пользовательского типа уведомления");
-    }
-    ...
-  }    
+  }
 ```
 
 _____
@@ -158,35 +153,32 @@ Simple example:
     Error
   }
   ...
-  class SomeClass()
+  NotifyController NotifyController;
+  ...
+  public SomeConstructor()
   {
-    public NotifyController { get; set; }
-    
-    public SomeClass()
-    {
       NotifyController = new NotifyController();
-
+      
       NotifyController.Config.Style.Foreground = new SolidColorBrush(Colors.Lime);
       NotifyController.Config.Style.Background = new SolidColorBrush(Colors.Black);
 
-      NotifyController.AddNotifyType((int)NotifyType.Default, "Default header", 2500);
-      NotifyController.AddNotifyType((int)NotifyType.Error, "Error header", 4000);
-    }
-    ...
-    public SomeCallingMethod()
-    {
+      NotifyController.Config.Behavior.ShowAnimation = NotifyAnimation.Slide;
+
+      NotifyController.AddNotifyType((int)NotifyType.Default, "First called notify", 2500);
+  }
+  ...
+  public SomeCallMethod(object sender, RoutedEventArgs e)
+  {
+      NotifyController.ShowNotify((int)NotifyType.Default, "Has Timeout = 2500 and default AnimationTimeout");
+    
       NotifyController.ShowNotify(new NotifyWindow(NotifyController.Config.Style, NotifyController.Config.Behavior)
       {
-        Header           = "Hi!",
-        Text             = "I can create a notification like this",
-        Timeout          = 5000,
-        AnimationTimeout = 400
+          Header = "Second called notify",
+          Text = "Has Timeout = 5000 and AnimationTimeout = 400",
+          Timeout = 5000,
+          AnimationTimeout = 400
       });
-      
-      NotifyController.ShowNotify((int)NotifyType.Default, "And using a custom notification type");
-    }
-    ...
-  }    
+  }
 ```
 
 _____
@@ -195,8 +187,12 @@ _____
 ### `RU`
 <a name="Changes_RU"/>
 
+Version 1.2.2:
+  * Полный баг-фикс в Config.Style.AutoHeight.
+  * Оптимизации кода.
+
 Version 1.2.1:
-  * Bug fixed в Config.Style.AutoHeight. Раньше окна вели себя странно при свойстве = true.
+  * Частичный баг-фикс в Config.Style.AutoHeight. Раньше окна вели себя странно при свойстве = true.
 
 Version 1.2:
   * Добавлено:
@@ -221,8 +217,12 @@ Version 1.0:
 ### `EN`
 <a name="Changes_EN"/>
 
+Version 1.2.2:
+  * Completely fixed bug in Config.Style.AutoHeight.
+  * Code optimization.
+  
 Version 1.2.1:
-  * Bug fixed in Config.Style.AutoHeight. Previously, Windows behaved strangely with the property = true.
+  * Partially bug fixed in Config.Style.AutoHeight. Previously, Windows behaved strangely with the property = true.
 
 Version 1.2:
   * Added:
