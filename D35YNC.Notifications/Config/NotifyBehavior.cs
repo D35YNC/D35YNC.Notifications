@@ -17,11 +17,11 @@ namespace D35YNC.Notifications
         /// <summary>
         /// Тип анимации открытия уведомления
         /// </summary>
-        public NotifyAnimation ShowAnimation { get; set; } = NotifyAnimation.Slide;
+        public NotifyAnimation ShowAnimation { get; set; } = NotifyAnimation.Transparent;
 
         /// <summary>
         /// Тип анимации закрытия уведомления
         /// </summary>
-        public NotifyAnimation HideAnimation { get; set; } = NotifyAnimation.Slide;
+        public NotifyAnimation HideAnimation { get; set; } = NotifyAnimation.Transparent;
     }
 }

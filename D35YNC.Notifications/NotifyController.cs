@@ -73,6 +73,7 @@ namespace D35YNC.Notifications
             new Thread(new ThreadStart(delegate () { Thread.Sleep((window as INotifyWindow).Timeout); (window as INotifyWindow).StartHideAnimation(); }))
                 .Start();
 
+        /// <summary> Очищает все используемые ресурсы </summary>
         public void CloseAll()
         {
             while (NotifyList.Count > 0)
@@ -101,9 +102,8 @@ namespace D35YNC.Notifications
                 {
                     NotifyList.Add(window);
                 }
-
-                UpdateWindowsPos();
                 window.Show();
+                UpdateWindowsPos();
             }
         }
 
@@ -114,8 +114,8 @@ namespace D35YNC.Notifications
             if (NotifyList.Contains(window))
             {
                 NotifyList.Remove(window);
-                UpdateWindowsPos();
                 window.Close();
+                UpdateWindowsPos();
             }
         }
 
@@ -132,20 +132,20 @@ namespace D35YNC.Notifications
                         {                            
                             window.Top = top;
                             top += (window.Height + Config.Padding);
-                            window.Left = 0;
+                            //window.Left = 0;
                         }
                         break;
                     }
                 case NotifyPosition.TopRight:
                     {
                         double top = Config.Padding;
-                        double left = SystemParameters.WorkArea.Width;
+                        //double left = SystemParameters.WorkArea.Width;
 
                         foreach (Window window in NotifyList)
                         {
                             window.Top = top;
                             top += (window.Height + Config.Padding);
-                            window.Left = left - window.Width;
+                            //window.Left = left - window.Width;
                         }
                         break;
                     }
@@ -155,23 +155,22 @@ namespace D35YNC.Notifications
 
                         foreach (Window window in NotifyList)
                         {
-                            double a = window.Height;
                             top -= (window.Height + Config.Padding);
                             window.Top = top;
-                            window.Left = 0;
+                            //window.Left = 0;
                         }
                         break;
                     }
                 case NotifyPosition.BottomRight:
                     {
                         double top = SystemParameters.WorkArea.Height;
-                        double left = SystemParameters.WorkArea.Width;
+                        //double left = SystemParameters.WorkArea.Width;
 
                         foreach (Window window in NotifyList)
                         {
                             top -= (window.Height + Config.Padding);
                             window.Top = top;
-                            window.Left = left - window.Width;
+                            //window.Left = left - window.Width;
                         }
                         break;
                     }
@@ -182,7 +181,7 @@ namespace D35YNC.Notifications
         {
             if (Config.NotifyTypesConfigs.ContainsKey(type))
             {
-                throw new Exception("Dictionary contains this type");
+                throw new Exception("Dictionary already contains this type");
             }
             Config.NotifyTypesConfigs.Add(type, new Tuple<string, int>(header, timeout));
         }

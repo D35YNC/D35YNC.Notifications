@@ -9,7 +9,6 @@ namespace TEST
         // Your types here..
 
         Default,
-        Error
     }
     public partial class MainWindow : Window
     {
@@ -23,24 +22,23 @@ namespace TEST
 
             NotifyController.Config.Style.Foreground = new SolidColorBrush(Colors.Lime);
             NotifyController.Config.Style.Background = new SolidColorBrush(Colors.Black);
-            NotifyController.Config.Style.AutoHeight = true;
-            NotifyController.Config.Behavior.HideAnimation = NotifyAnimation.Transparent;
-            NotifyController.Config.Behavior.Position = NotifyPosition.BottomLeft;
-            NotifyController.AddNotifyType((int)NotifyType.Default, "Обычный заголовок", 2500);
-            NotifyController.AddNotifyType((int)NotifyType.Error, "Заголовок ошибки", 4000);
+
+            NotifyController.Config.Behavior.ShowAnimation = NotifyAnimation.Slide;
+
+            NotifyController.AddNotifyType((int)NotifyType.Default, "First called notify", 2500);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            NotifyController.ShowNotify((int)NotifyType.Default, "Has Timeout = 2500 and default AnimationTimeout");
+
             NotifyController.ShowNotify(new NotifyWindow(NotifyController.Config.Style, NotifyController.Config.Behavior)
             {
-                Header = "Hi!",
-                Text = "I can create a notification like this",
+                Header = "Second called notify",
+                Text = "Has Timeout = 5000 and AnimationTimeout = 400",
                 Timeout = 5000,
                 AnimationTimeout = 400
-            });
-
-            NotifyController.ShowNotify((int)NotifyType.Default, "And like this");
+            });           
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

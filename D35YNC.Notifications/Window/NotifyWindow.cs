@@ -54,19 +54,49 @@ namespace D35YNC.Notifications
         private Border _Border          { get; set; }
         private StackPanel _StackPanel  { get; set; }
         private StackPanel _SPLine      { get; set; }
+        
+        /// <summary>
+        /// Конструктор для второго типа уведомлений.
+        /// Необходимо инициализировать дополнительные свойства, такие как: Header, Text, Interval, AnimationTimeout.
+        /// </summary>
+        /// <param name="style">Стиль этого уведомления.</param>
+        public NotifyWindow(NotifyStyle style, NotifyBehavior behavior)
+        {
+            Style = style;
+            Behavior = behavior;
+            InitComponent();
+            InitAnimations();
+        }
+
+        /// <summary> Конструктор для первого типа уведомлений.</summary>
+        /// <param name="config">Конфигурация этого уведомления.</param>
+        /// <param name="type">Тип этого уведомления. Влияет на Header и Timeout.</param>
+        /// <param name="text">Текст этого уведомления.</param>
+        public NotifyWindow(NotifyConfig config, int type, string text)
+        {
+            Style    = config.Style;
+            Behavior = config.Behavior;
+            Text     = text;
+            Header   = config.NotifyTypesConfigs[type].Item1;
+            Timeout  = config.NotifyTypesConfigs[type].Item2;
+            AnimationTimeout = config.AnimationTimeout;
+            InitComponent();
+            InitAnimations();
+        }
 
         /// <summary> Инициализирует окно без xaml - разметки </summary>
         private void InitComponent()
         {
             #region Window initialization
             this.WindowStyle = WindowStyle.None;
+            this.ResizeMode = ResizeMode.NoResize;
             this.Background = new SolidColorBrush(Colors.Transparent);
             this.AllowsTransparency = true;
             this.ShowInTaskbar = false;
-            this.ResizeMode = ResizeMode.NoResize;
+            this.Topmost = true;
             this.Focusable = false;
             this.Loaded += Window_Loaded;
-
+            this.MaxWidth = 300;
             this.Width = Style.Width;
             this.Height = Style.Height;
             if (Style.AutoHeight)
@@ -81,7 +111,7 @@ namespace D35YNC.Notifications
                 BorderThickness = new Thickness(1),
                 CornerRadius = new CornerRadius(Style.CornerRadius),
                 BorderBrush = Style.Foreground,
-                Background = Style.Background
+                Background = Style.Background,                
             };
 
             _HeaderBlock = new TextBlock
@@ -121,35 +151,6 @@ namespace D35YNC.Notifications
             container = this;
             container.AddChild(_Border);
             #endregion            
-        }
-
-        /// <summary>
-        /// Конструктор для второго типа уведомлений.
-        /// Необходимо инициализировать дополнительные свойства, такие как: Header, Text, Interval, AnimationTimeout.
-        /// </summary>
-        /// <param name="style">Стиль этого уведомления.</param>
-        public NotifyWindow(NotifyStyle style, NotifyBehavior behavior)
-        {
-            Style = style;
-            Behavior = behavior;
-            InitComponent();
-            InitAnimations();
-        }
-
-        /// <summary> Конструктор для первого типа уведомлений.</summary>
-        /// <param name="config">Конфигурация этого уведомления.</param>
-        /// <param name="type">Тип этого уведомления. Влияет на Header и Timeout.</param>
-        /// <param name="text">Текст этого уведомления.</param>
-        public NotifyWindow(NotifyConfig config, int type, string text)
-        {
-            Style = config.Style;
-            Behavior = config.Behavior;
-            Text = text;
-            Header = config.NotifyTypesConfigs[type].Item1;
-            Timeout = config.NotifyTypesConfigs[type].Item2;
-            AnimationTimeout = config.AnimationTimeout;
-            InitComponent();
-            InitAnimations();
         }
 
         private void InitAnimations()
@@ -233,6 +234,7 @@ namespace D35YNC.Notifications
         {
             _HeaderBlock.Text = Header;
             _TextBlock.Text = Text;
+
             ShowAnimation();            
         }
 
