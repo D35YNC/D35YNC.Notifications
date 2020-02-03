@@ -1,5 +1,8 @@
 # D35YNC.Notifications<Version. 1.2.2>
 
+# АРИХИВ
+# 03.02.2020
+
 Простая (почти) библиотека pop-up уведомлений.
 
 Simple pop-up notification library. [EN](#DescriptionEN)
