@@ -27,8 +27,7 @@ _____
 **Установка**
 
   * ~~NuGet: Install-Package D35YNC.Notifications -Version 1.2.2~~
-  Или
-  * Добавьте в свой проект папку "D35YNC.Notifications".
+  * Или добавь в свой проект папку "D35YNC.Notifications".
 
 **Использование**
 
@@ -115,8 +114,7 @@ File                          |Content
 **Installation**
 
   * ~~NuGet: Install-Package D35YNC.Notifications -Version 1.2.2~~
-  Or
-  * Add folder "D35YNC.Notifications" to your project
+  * Or add folder "D35YNC.Notifications" to your project
   
 **Usage**
 
