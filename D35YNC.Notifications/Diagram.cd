@@ -1,87 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="D35YNC.Notifications.NotifyBehavior">
-    <Position X="6.25" Y="0.5" Width="1.5" />
+  <Class Name="D35YNC.Notifications.SimpleNotification">
+    <Position X="5.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
-      <FileName>Config\NotifyBehavior.cs</FileName>
+      <HashCode>BAAAAAAAAAAAAAAAAEIAAAgCAAAAAgAAAAAACAAIAAQ=</HashCode>
+      <FileName>SimpleNotification.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="D35YNC.Notifications.NotifyConfig">
-    <Position X="3" Y="0.5" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAACAAAAAAAEAABAAAABAIBAAAAAAA=</HashCode>
-      <FileName>Config\NotifyConfig.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="D35YNC.Notifications.NotifyStyle">
-    <Position X="4.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAACAABAAAAAAAAAAAAUAAAAAAABACAAAiBIAAIBA=</HashCode>
-      <FileName>Config\NotifyStyle.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="D35YNC.Notifications.NotifyWindow" BaseTypeListCollapsed="true">
-    <Position X="11" Y="0.5" Width="2.5" />
+  <Class Name="D35YNC.Notifications.Notification">
+    <Position X="3" Y="0.5" Width="2" />
     <NestedTypes>
-      <Delegate Name="D35YNC.Notifications.NotifyWindow.HideAnim" Collapsed="true">
+      <Delegate Name="D35YNC.Notifications.Notification.ShowedNotifyEventHandler" Collapsed="true">
         <TypeIdentifier>
-          <NewMemberFileName>Window\NotifyWindow.cs</NewMemberFileName>
+          <NewMemberFileName>Notification.cs</NewMemberFileName>
         </TypeIdentifier>
       </Delegate>
-      <Delegate Name="D35YNC.Notifications.NotifyWindow.ShowAnim" Collapsed="true">
+      <Delegate Name="D35YNC.Notifications.Notification.HidedNotifyEventHandler" Collapsed="true">
         <TypeIdentifier>
-          <NewMemberFileName>Window\NotifyWindow.cs</NewMemberFileName>
+          <NewMemberFileName>Notification.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="D35YNC.Notifications.Notification.ShowAnimationDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Notification.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="D35YNC.Notifications.Notification.HideAnimationDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Notification.cs</NewMemberFileName>
         </TypeIdentifier>
       </Delegate>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>JQAIAABAAABQAAAACkICAAgCEAAAAAYABAEACAAAAAQ=</HashCode>
-      <FileName>Window\NotifyWindow.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="0.1" Collapsed="true" />
-  </Class>
-  <Class Name="D35YNC.Notifications.NotifyController">
-    <Position X="0.5" Y="0.5" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>ABAAAAAAIgAAAAAAgAAAAAAAAEAAAAACAAAAAAAgBAI=</HashCode>
-      <FileName>NotifyController.cs</FileName>
+      <HashCode>oEAIAAAAAkAQAAAAAggAAAAAAAAAAAAABAAAABAAAAA=</HashCode>
+      <FileName>Notification.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="D35YNC.Notifications.INotifyWindow">
-    <Position X="8.75" Y="0.5" Width="1.75" />
+  <Class Name="D35YNC.Notifications.NotificationsController">
+    <Position X="0.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAIAABAAAAAAAAAAAACAAAAEAAAAAIABAAAAAAAAAA=</HashCode>
-      <FileName>Window\INotifyWindow.cs</FileName>
+      <HashCode>ABQAAAAAIAAgAAAAAAAAgBAACAACAAAYQAABAAAABAI=</HashCode>
+      <FileName>NotificationsController.cs</FileName>
     </TypeIdentifier>
-  </Interface>
-  <Enum Name="D35YNC.Notifications.NotifyAnimation">
-    <Position X="6.5" Y="4" Width="1.5" />
+  </Class>
+  <Class Name="D35YNC.Notifications.Settings.NotificationBehavior">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Settings\NotificationBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="D35YNC.Notifications.Settings.NotificationMarkup">
+    <Position X="9.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEBAAAAAAAAAAAAEAAAAAAABACAAACBIAAABA=</HashCode>
+      <FileName>Settings\NotificationMarkup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="D35YNC.Notifications.Enums.NotifyAnimationType">
+    <Position X="8" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
-      <FileName>Enums\NotifyAnimation.cs</FileName>
+      <FileName>Enums\NotifyAnimationType.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="D35YNC.Notifications.NotifyPosition">
-    <Position X="6.5" Y="2.25" Width="1.5" />
+  <Enum Name="D35YNC.Notifications.Enums.NotifyPosition">
+    <Position X="8" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAIAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Enums\NotifyPosition.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Delegate Name="D35YNC.Notifications.ShowedNotifyEventHandler" Collapsed="true">
-    <Position X="8.75" Y="4.25" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
-      <FileName>Window\INotifyWindow.cs</FileName>
-    </TypeIdentifier>
-  </Delegate>
-  <Delegate Name="D35YNC.Notifications.HidedNotifyEventHandler" Collapsed="true">
-    <Position X="8.75" Y="3.5" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
-      <FileName>Window\INotifyWindow.cs</FileName>
-    </TypeIdentifier>
-  </Delegate>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

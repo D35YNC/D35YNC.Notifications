@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D35YNC.Notifications", "D35YNC.Notifications\D35YNC.Notifications.csproj", "{7F803731-3ECD-41E1-9992-6655B5F5A746}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEST", "TEST\TEST.csproj", "{BDF3D585-5F30-4034-9455-7CAAE032FBCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{BDF3D585-5F30-4034-9455-7CAAE032FBCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

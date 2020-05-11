@@ -5,9 +5,9 @@
  **************/
 
 
-namespace D35YNC.Notifications
+namespace D35YNC.Notifications.Enums
 {
-    public enum NotifyAnimation
+    public enum NotifyAnimationType
     {
         Slide,
         Transparent

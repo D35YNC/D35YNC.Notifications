@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace TEST
+namespace Demo
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml

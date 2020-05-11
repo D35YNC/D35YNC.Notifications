@@ -1,5 +1,7 @@
 # D35YNC.Notifications<Version. 1.2.2>
 
+# README.MD is Outdated, the update is not coming soon
+
 Простая (почти) библиотека pop-up уведомлений.
 
 Simple pop-up notification library. [EN](#DescriptionEN)
@@ -13,83 +15,72 @@ _____
 
 ![Диаграмма](https://github.com/D35YNC/D35YNC.Notifications/blob/master/D35YNC.Notifications/Diagram.png)
 
-Файл                          | Содержание
-------------------------------|---------------------------------------------------
-./**NotifyController.cs**     |Контроллер. По факту ядро.
-./Config/**NotifyConfig.cs**  |Конфиги уведомлений
-./Config/**NotifyStyle.cs**   |Стили уведомлений
-./Config/**NotifyBehavior.cs**|Поведение уведомлений
-./Enums/**NotifyPosition.cs** |Положения уведомлений
-./Enums/**NotifyAnimaion.cs** |Анимации уведомлений
-./Window/**IPopupWindow.cs**  |Интерфейс окна уведомления
-./Window/**NotifyWindow.cs**  |Логика уведомления
+Файл                              | Содержание
+----------------------------------|----------------------------
+./**NotifyController.cs**         | Контроллер. По факту ядро
+./Config/**NotifyConfig.cs**      | Конфиги уведомлений
+./Config/**NotifyStyle.cs**       | Стили уведомлений
+./Config/**NotifyBehavior.cs**    | Поведение уведомлений
+./Enums/**NotifyPosition.cs**     | Положения уведомлений
+./Enums/**NotifyAnimaionType.cs** | Анимации уведомлений
+./Window/**INotifyWindow.cs**     | Интерфейс окна уведомления
+./Window/**NotifyWindow.cs**      | Логика уведомления
 
 **Установка**
 
-  * Добавьте в свой проект папку "D35YNC.Notifications".
-  * Или
-  * NuGet: Install-Package D35YNC.Notifications
+  * ~~NuGet: Install-Package D35YNC.Notifications -Version 1.2.2~~
+  * Или добавь в свой проект папку "D35YNC.Notifications".
 
 **Использование**
 
 Из диаграммы видно, что NotifyController имеет 2 перегрузки Метода ShowNotify(..)
 ```C#
-public void ShowNotify(Window window);
-public void ShowNotify(int type, string text);
+public void ShowNotify(Window window) {...}
+public void ShowNotify(string header, string text, int timeout) {...}
 ```
-В первом случае, необходимо проинициализировать окно уведомления NotifyWindow.
-Во втором случае, Контроллер сделает это сам, если тип (int type) был добавлен в Конфиг методом AddNotifyType(...).
+В первом случае, необходимо проинициализировать окно уведомления NotifyWindow. Обязательно наследование от INotifyWindow.
+Во втором случае, Контроллер сделает это сам.
 
 Инициализация NotifyWindow происходит так:
 ```C#
 new NotifyWindow(NotifyStyle, NotifyBehavior) { Header.., Text.., Timeout.., AnimationTimeout...};
 ```
 
-Перед тем, как показать окно, Контроллер проверяет его. (Обязательно необходимо проинициализировать Timeout и AnimationTimeout)
-
-Стандартный конфиг:     NotifyConfig    >  NotifyController.Config
-
-Стандартный стиль:      NotifyStyle     >  NotifyController.Config.Style
-
-Стандартное поведение:  NotifyBehavior  >  NotifyController.Config.Behavior
-
-Изменение этих свойств возможно напрямую из NotifyController.
-
 Простой пример:
 ```C#
   using D35YNC.Notifications;
-  ...
-  enum NotifyType
-  {
-    Default,
-    Error
-  }
+  using D35YNC.Notifications.Enums;
+  using D35YNC.Notifications.NWindow;
   ...
   NotifyController NotifyController;
   ...
-  public SomeConstructor()
+  void SomeConstructor()
   {
-      NotifyController = new NotifyController();
-      
-      NotifyController.Config.Style.Foreground = new SolidColorBrush(Colors.Lime);
-      NotifyController.Config.Style.Background = new SolidColorBrush(Colors.Black);
+    NotifyController = new NotifyController();
 
-      NotifyController.Config.Behavior.ShowAnimation = NotifyAnimation.Slide;
+    NotifyController.Config.ReserveList = true;
 
-      NotifyController.AddNotifyType((int)NotifyType.Default, "Это уведомление вызвано первым", 2500);
+    NotifyController.Style.Foreground = new SolidColorBrush(Colors.Lime);
+    NotifyController.Style.Background = new SolidColorBrush(Colors.Black);
+
+    NotifyController.Behavior.ShowAnimation = NotifyAnimationType.Slide;
   }
   ...
-  public SomeCallMethod(object sender, RoutedEventArgs e)
+  void SomeCallMethod()
   {
-      NotifyController.ShowNotify((int)NotifyType.Default, "У него Timeout = 2500 и стандартный AnimationTimeout");
-    
-      NotifyController.ShowNotify(new NotifyWindow(NotifyController.Config.Style, NotifyController.Config.Behavior)
-      {
-          Header = "Это уведомление вызвано вторым",
-          Text = "У него Timeout = 5000 и AnimationTimeout = 400",
-          Timeout = 5000,
-          AnimationTimeout = 400
-      });
+    NotifyController.ShowNotify("First called notify", "Has Timeout = 2500 and default AnimationTimeout", 2500);
+	
+	NotifyController.ShowNotify(new NotifyWindow(NotifyController.Style, NotifyController.Behavior)
+	{
+	  Header = "Second called notify",
+      Text = "Has Timeout = 5000 and AnimationTimeout = 400",
+      Timeout = 5000,
+      AnimationTimeout = 400
+	});
+  }
+  void SomeClosingMethod()
+  {
+    NotifyController.CloseAll();
   }
 ```
 
@@ -101,22 +92,21 @@ _____
 
 **Contents**
 
-File                          |Content
-------------------------------|--------------------------------------------------
-./**NotifyController.cs**     |Controller. In fact it's the core.
-./Config/**NotifyConfig.cs**  |Configs of notifications
-./Config/**NotifyStyle.cs**   |Notifications style
-./Config/**NotifyBehavior.cs**|Notifications behavior
-./Enums/**NotifyPosition.cs** |Notifications positions
-./Enums/**NotifyAnimaion.cs** |Notifications animations
-./Window/**IPopupWindow.cs**  |Interface of popup window
-./Window/**NotifyWindow.cs**  |Popup window logic
+File                           |Content
+-------------------------------|--------------------------------------------------
+./**NotifyController.cs**      |Controller. In fact it's the core.
+./Config/**NotifyConfig.cs**   |Configs of notifications
+./Config/**NotifyStyle.cs**    |Notifications style
+./Config/**NotifyBehavior.cs** |Notifications behavior
+./Enums/**NotifyPosition.cs**  |Notifications positions
+./Enums/**NotifyAnimaion.cs**  |Notifications animations
+./Window/**INotifyWindow.cs**  |Interface of popup window
+./Window/**NotifyWindow.cs**   |Popup window logic
 
 **Installation**
 
-  * Add folder "D35YNC.Notifications" to your project
-  * Or
-  * NuGet: Install-Package D35YNC.Notifications
+  * ~~NuGet: Install-Package D35YNC.Notifications -Version 1.2.2~~
+  * Or add folder "D35YNC.Notifications" to your project
   
 **Usage**
 
@@ -125,59 +115,49 @@ NotifyController has 2 overloads of the Method ShowNotify(..)
 public void ShowNotify(Window window);
 public void ShowNotify(int type, string text);
 ```
-In the first case, you need to initialize the NotifyWindow notification window.
-In the second case, the Controller will do it itself if the type (int type) was added to the Config by the AddNotifyType(...).
+In the first case, you need to initialize the Notify Window. Inheritance from INotifWindow is required.
+In the second case, the Controller will do it itself.
 
-Initialization NotifyWindow happens:
+Initialization of NotifyWindow occurs as follows:
 ```C#
 new NotifyWindow(NotifyStyle, NotifyBehavior) { Header.., Text.., Timeout.., AnimationTimeout...};
 ```
 
-Before showing the window, the Controller checks it. (Be sure to initialize the Timeout and AnimationTimeout)
-
-Standard config: NotifyConfig > NotifyController.Config
-
-Standard style: NotifyStyle > NotifyController.Config.Style
-
-Standard behavior: NotifyBehavior > NotifyController.Config.Behavior
-
-Change these properties directly in NotifyController.
-
 Simple example:
 ```C#
   using D35YNC.Notifications;
-  ...
-  enum NotifyType
-  {
-    Default,
-    Error
-  }
+  using D35YNC.Notifications.Enums;
+  using D35YNC.Notifications.NWindow;
   ...
   NotifyController NotifyController;
   ...
-  public SomeConstructor()
+  void SomeConstructor()
   {
-      NotifyController = new NotifyController();
-      
-      NotifyController.Config.Style.Foreground = new SolidColorBrush(Colors.Lime);
-      NotifyController.Config.Style.Background = new SolidColorBrush(Colors.Black);
+    NotifyController = new NotifyController();
 
-      NotifyController.Config.Behavior.ShowAnimation = NotifyAnimation.Slide;
+    NotifyController.Config.ReserveList = true;
 
-      NotifyController.AddNotifyType((int)NotifyType.Default, "First called notify", 2500);
+    NotifyController.Style.Foreground = new SolidColorBrush(Colors.Lime);
+    NotifyController.Style.Background = new SolidColorBrush(Colors.Black);
+
+    NotifyController.Behavior.ShowAnimation = NotifyAnimationType.Slide;
   }
   ...
-  public SomeCallMethod(object sender, RoutedEventArgs e)
+  void SomeCallMethod()
   {
-      NotifyController.ShowNotify((int)NotifyType.Default, "Has Timeout = 2500 and default AnimationTimeout");
-    
-      NotifyController.ShowNotify(new NotifyWindow(NotifyController.Config.Style, NotifyController.Config.Behavior)
-      {
-          Header = "Second called notify",
-          Text = "Has Timeout = 5000 and AnimationTimeout = 400",
-          Timeout = 5000,
-          AnimationTimeout = 400
-      });
+    NotifyController.ShowNotify("First called notify", "Has Timeout = 2500 and default AnimationTimeout", 2500);
+	
+	NotifyController.ShowNotify(new NotifyWindow(NotifyController.Style, NotifyController.Behavior)
+	{
+	  Header = "Second called notify",
+      Text = "Has Timeout = 5000 and AnimationTimeout = 400",
+      Timeout = 5000,
+      AnimationTimeout = 400
+	});
+  }
+  void SomeClosingMethod()
+  {
+    NotifyController.CloseAll();
   }
 ```
 
@@ -186,6 +166,10 @@ _____
 
 ### `RU`
 <a name="Changes_RU"/>
+
+Version 1.2.3:
+  * Багфиксы.
+  * Улучшения кода.
 
 Version 1.2.2:
   * Полный баг-фикс в Config.Style.AutoHeight.
@@ -216,6 +200,10 @@ Version 1.0:
 
 ### `EN`
 <a name="Changes_EN"/>
+
+Version 1.2.3:
+  * Some bug fixes.
+  * Code improvements.
 
 Version 1.2.2:
   * Completely fixed bug in Config.Style.AutoHeight.

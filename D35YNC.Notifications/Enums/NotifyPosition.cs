@@ -5,7 +5,7 @@
  **************/
 
 
-namespace D35YNC.Notifications
+namespace D35YNC.Notifications.Enums
 {
     public enum NotifyPosition
     {
