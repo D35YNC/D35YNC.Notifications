@@ -1,7 +1,7 @@
 ﻿/************** 
  * File: D35YNC.Notifications/NotificationsController.cs
  * Description: Pop-up notification library
- * D35YNC; 2019-2020
+ * D35YNC 2019-2020
  **************/
 
 
@@ -10,7 +10,6 @@ using D35YNC.Notifications.Settings;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
 namespace D35YNC.Notifications
@@ -18,7 +17,7 @@ namespace D35YNC.Notifications
     public class NotificationsController
     {
         // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
-        public NotificationMarkup Marking;
+        public Markup Markup;
 
         // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
         public SolidColorBrush ForegroundColor;
@@ -36,89 +35,117 @@ namespace D35YNC.Notifications
         // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
         /// <summary>Максимальное количество уведомлений, которые могут одновременно находиться на экране</summary>
         public int MaxNotifyCount = 5;
-        // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ// ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
-        public int NotificationTimeout = 3000;
-        public int AnimationDuration = 300;
 
 
-        private readonly List<Notification> _NotificationsList;
+        private readonly List<Notification> _Notifications;
 
-
+        
+        /// <summary>
+        /// Инициализирует контроллер со стандартными параметрами
+        /// </summary>
         public NotificationsController()
         {
-            Marking = new NotificationMarkup();
-            _NotificationsList = new List<Notification>();
+            Markup = new Markup();
+            _Notifications = new List<Notification>();
         }
 
 
-        public NotificationsController(NotificationMarkup customMarking)
+        /// <summary>
+        /// Инициализирует контроллер с кастомными параметрами
+        /// </summary>
+        /// <param name="customMarkup"></param>
+        public NotificationsController(Markup customMarkup)
         {
-            Marking = customMarking ?? throw new Exception("The value cannot be equal to null");
-            _NotificationsList = new List<Notification>();
+            Markup = customMarkup ?? throw new Exception("The value cannot be equal to null");
+            _Notifications = new List<Notification>();
         }
 
 
-        /// <summary>Показывает наследника от <see cref="D35YNC.Notifications.Notification"/></summary>
-        public void ShowNotification(Notification window)
+        /// <summary>
+        /// Показывает наследника от <see cref="D35YNC.Notifications.Notification"/>
+        /// </summary>
+        public void ShowNotification(Notification notification)
         {
-            if (window is Notification)
+            notification.OnHided += UnregisterNotify;
+            RegisterNotify(notification);
+        }
+
+
+        /// <summary>
+        /// Показывает <see cref="D35YNC.Notifications.SimpleNotification"/> с заданными параметрами
+        /// </summary>
+        /// <param name="header">Заголовок уведомления</param>
+        /// <param name="text">Текст уведомления</param>
+        /// <param name="timeout">Таймаут уведомления (ms)</param>
+        /// <param name="animDuration">Длительность анимации (ms)</param>
+        public void ShowNotification(string header, string text, int timeout = -1, int animDuration = -1)
+        {
+            ShowNotification(new SimpleNotification(header, text, Markup, timeout, animDuration, ForegroundColor, BackgroundColor));
+        }
+
+
+        /// <summary>
+        /// Устанавливает новое значение таймаута для <see cref="D35YNC.Notifications.Notification"/>
+        /// </summary>
+        /// <param name="newValue">ms</param>
+        public void SetDefaultTimeout(int newValue)
+        {
+            if (newValue > 0)
             {
-                (window as Notification).OnHided += UnregisterNotify;
-                RegisterNotify(window);
+                Notification.DefaultTimeout = newValue;
             }
             else
             {
-                throw new Exception("Window is not are D35YNC.Notifications.Notification.");
+                throw new Exception("Value less than zero");
             }
         }
 
-
-        /// <summary>Показывает <see cref="D35YNC.Notifications.SimpleNotification"/> с заданными параметрами</summary>
-        /// <param name="header">Заголовок уведомления</param>
-        /// <param name="text">Текст уведомления</param>
-        /// <param name="timeout">Таймаут уведомления</param>
-        /// <param name="animDuration">Длительность анимации</param>
-        public void ShowNotification(string header, string text, int timeout = -1, int animDuration = -1)
+        /// <summary>
+        /// Устанавливает новое значение длительности анимации для <see cref="D35YNC.Notifications.Notification"/>
+        /// </summary>
+        /// <param name="newValue">ms</param>
+        public void SetDefaultAnimDuration(int newValue)
         {
-            if (timeout <= 0)
+            if (newValue > 0)
             {
-                timeout = NotificationTimeout;
+                Notification.DefaultAnimDuration = newValue;
             }
-            if (animDuration <= 0)
+            else
             {
-                animDuration = AnimationDuration;
+                throw new Exception("Value less than zero");
             }
-            ShowNotification(new SimpleNotification(header, text, Marking, timeout, animDuration, ForegroundColor, BackgroundColor));
         }
 
 
-        /// <summary>Закрывает все активные уведомления</summary>
+        /// <summary>
+        /// Закрывает все активные уведомления
+        /// </summary>
         public void CloseAll()
         {
-            foreach (Window notification in _NotificationsList)
+            foreach (Window notification in _Notifications)
             {
                 notification.Close();
             }
-            _NotificationsList.Clear();
+            _Notifications.Clear();
         }
         
         
         private void RegisterNotify(Notification window)
         {
-            if (_NotificationsList.Count >= MaxNotifyCount)
+            if (_Notifications.Count >= MaxNotifyCount)
             {
-                UnregisterNotify(_NotificationsList[0]);
+                UnregisterNotify(_Notifications[0]);
             }
 
-            if (!_NotificationsList.Contains(window))
+            if (!_Notifications.Contains(window))
             {
                 if (ReserveList)
                 {
-                    _NotificationsList.Insert(0, window);
+                    _Notifications.Insert(0, window);
                 }
                 else
                 {
-                    _NotificationsList.Add(window);
+                    _Notifications.Add(window);
                 }
 
                 window.Show();
@@ -129,9 +156,9 @@ namespace D35YNC.Notifications
         
         private void UnregisterNotify(Notification window)
         {
-            if (_NotificationsList.Contains(window))
+            if (_Notifications.Contains(window))
             {
-                _NotificationsList.Remove(window);
+                _Notifications.Remove(window);
                 window.Close();
                 UpdateWindowsPos();
             }
@@ -140,46 +167,46 @@ namespace D35YNC.Notifications
         
         private void UpdateWindowsPos()
         {
-            switch (NotificationBehavior.Position)
+            switch (Behavior.Position)
             {
-                case NotifyPosition.TopLeft:
+                case Position.TopLeft:
                     {
                         double top = WindowsPadding;
 
-                        foreach (Window window in _NotificationsList)
+                        foreach (Window window in _Notifications)
                         {
                             window.Top = top;
                             top += (window.Height + WindowsPadding);
                         }
                         break;
                     }
-                case NotifyPosition.TopRight:
+                case Position.TopRight:
                     {
                         double top = WindowsPadding;
 
-                        foreach (Window window in _NotificationsList)
+                        foreach (Window window in _Notifications)
                         {
                             window.Top = top;
                             top += (window.Height + WindowsPadding);
                         }
                         break;
                     }
-                case NotifyPosition.BottomLeft:
+                case Position.BottomLeft:
                     {
                         double top = SystemParameters.WorkArea.Height;
 
-                        foreach (Window window in _NotificationsList)
+                        foreach (Window window in _Notifications)
                         {
                             top -= (window.Height + WindowsPadding);
                             window.Top = top;
                         }
                         break;
                     }
-                case NotifyPosition.BottomRight:
+                case Position.BottomRight:
                     {
                         double top = SystemParameters.WorkArea.Height;
 
-                        foreach (Window window in _NotificationsList)
+                        foreach (Window window in _Notifications)
                         {
                             top -= (window.Height + WindowsPadding);
                             window.Top = top;

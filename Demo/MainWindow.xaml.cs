@@ -22,7 +22,7 @@ namespace Demo
             NotifyController.ForegroundColor = new SolidColorBrush(Colors.Lime);
             NotifyController.BackgroundColor = new SolidColorBrush(Colors.Black);
             
-            NotificationBehavior.ShowAnimation = NotifyAnimationType.Slide;
+            Behavior.ShowAnimationType = AnimationType.Slide;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

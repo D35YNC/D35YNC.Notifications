@@ -1,7 +1,7 @@
 ﻿/************** 
  * File: D35YNC.Notifications/Notification.cs
  * Description: Pop-up notification library
- * D35YNC; 2019 - 2020
+ * D35YNC 2019 - 2020
  **************/
 
 
@@ -20,59 +20,119 @@ namespace D35YNC.Notifications
     public abstract partial class Notification : Window
     {
         public delegate void ShowedNotifyEventHandler(Notification window);
-
-
         public delegate void HidedNotifyEventHandler(Notification window);
 
 
-        /// <summary>Происходит после окончания анимации появления окна</summary>
+        /// <summary>
+        /// Происходит после окончания анимации появления окна
+        /// </summary>
         public event ShowedNotifyEventHandler OnShowed;
 
 
-        /// <summary>Происходит после окончания анимации закрытия окна</summary>
+        /// <summary>
+        /// Происходит после окончания анимации закрытия окна
+        /// </summary>
         public event HidedNotifyEventHandler OnHided;
 
 
+        /// <summary>
+        /// Стандартный таймаут для <see cref="D35YNC.Notifications.Notification"/>
+        /// </summary>
+        public static int DefaultTimeout 
+        {
+            get 
+            {
+                return _DefaultTimeout;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    _DefaultTimeout = value;
+                }
+                else
+                {
+                    throw new Exception("Value less than zero");
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Стандартная длительность анимации для <see cref="D35YNC.Notifications.Notification"/>
+        /// </summary>
+        public static int DefaultAnimDuration
+        {
+            get
+            {
+                return _DefaultAnimDuration;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    _DefaultAnimDuration = value;
+                }
+                else
+                {
+                    throw new Exception("Value less than zero");
+                }
+            }
+        }
+
+
         private int _Timeout = 3000;
-        private int _AnimationDuration = 300;
-        private Task _TimeoutTask;
+
+        private static int _DefaultTimeout = 3000;
+        private static int _DefaultAnimDuration = 300;
+        
         private delegate void ShowAnimationDelegate();
         private delegate void HideAnimationDelegate();
+
         private ShowAnimationDelegate _ShowAnimation;
         private HideAnimationDelegate _HideAnimation;
 
 
+        /// <summary>
+        /// Начинает инициализировать <see cref="System.Windows.Window"/> и анимации
+        /// </summary>
+        /// <param name="timeout">ms</param>
+        /// <param name="animDuration">ms</param>
         public Notification(int timeout, int animDuration)
         {
             this.Loaded += NotifyWindow_Loaded;
             this.OnShowed += Notification_OnShowed;
 
-            _Timeout = timeout;
-            _AnimationDuration = animDuration;
+            if (timeout > 0)
+            {
+                _Timeout = timeout;
+            }
+            else
+            {
+                _Timeout = DefaultTimeout;
+            }
 
-            _TimeoutTask = new Task(new Action(
-                delegate
-                {
-                    Thread.Sleep(this._Timeout);
-                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate () { _HideAnimation(); });
-                }));
-
-            InitAnimations();
+            if (animDuration <= 0)
+            {
+                animDuration = DefaultAnimDuration;
+            }
+            
+            InitAnimations(animDuration);
         }
 
 
-        private void InitAnimations()
+        private void InitAnimations(int animationDuration)
         {
-            switch (NotificationBehavior.ShowAnimation)
+            switch (Behavior.ShowAnimationType)
             {
-                case NotifyAnimationType.Slide:
+                case AnimationType.Slide:
                     {
-                        if (NotificationBehavior.Position == NotifyPosition.TopRight || NotificationBehavior.Position == NotifyPosition.BottomRight)
+                        if (Behavior.Position == Position.TopRight || Behavior.Position == Position.BottomRight)
                         {
                             _ShowAnimation = delegate ()
                             {
                                 DoubleAnimation animation = new DoubleAnimation((int)SystemParameters.WorkArea.Width, (int)SystemParameters.WorkArea.Width - this.Width,
-                                    TimeSpan.FromMilliseconds(_AnimationDuration));
+                                    TimeSpan.FromMilliseconds(animationDuration));
                                 animation.Completed += ShowAnimation_Completed;
                                 ApplyAnimationClock(Window.LeftProperty, animation.CreateClock());
                             };
@@ -81,18 +141,18 @@ namespace D35YNC.Notifications
                         {
                             _ShowAnimation = delegate ()
                             {
-                                DoubleAnimation animation = new DoubleAnimation(-this.Width, 0, TimeSpan.FromMilliseconds(_AnimationDuration));
+                                DoubleAnimation animation = new DoubleAnimation(-this.Width, 0, TimeSpan.FromMilliseconds(animationDuration));
                                 animation.Completed += ShowAnimation_Completed;
                                 ApplyAnimationClock(Window.LeftProperty, animation.CreateClock());
                             };
                         }
                         break;
                     }
-                case NotifyAnimationType.Transparent:
+                case AnimationType.Transparent:
                     {
                         _ShowAnimation = delegate ()
                         {
-                            DoubleAnimation animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(_AnimationDuration));
+                            DoubleAnimation animation = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(animationDuration));
                             animation.Completed += ShowAnimation_Completed;
                             ApplyAnimationClock(Window.OpacityProperty, animation.CreateClock());
                         };
@@ -100,16 +160,16 @@ namespace D35YNC.Notifications
                     }
             }
 
-            switch (NotificationBehavior.HideAnimation)
+            switch (Behavior.HideAnimationType)
             {
-                case NotifyAnimationType.Slide:
+                case AnimationType.Slide:
                     {
-                        if (NotificationBehavior.Position == NotifyPosition.TopRight || NotificationBehavior.Position == NotifyPosition.BottomRight)
+                        if (Behavior.Position == Position.TopRight || Behavior.Position == Position.BottomRight)
                         {
                             _HideAnimation = delegate ()
                             {
                                 DoubleAnimation animation = new DoubleAnimation(this.Left, (int)SystemParameters.WorkArea.Width,
-                                    TimeSpan.FromMilliseconds(_AnimationDuration));
+                                    TimeSpan.FromMilliseconds(animationDuration));
                                 animation.Completed += HideAnimation_Completed;
                                 ApplyAnimationClock(Window.LeftProperty, animation.CreateClock());
                             };
@@ -118,18 +178,18 @@ namespace D35YNC.Notifications
                         {
                             _HideAnimation = delegate ()
                             {
-                                DoubleAnimation animation = new DoubleAnimation(0, -this.Width, TimeSpan.FromMilliseconds(_AnimationDuration));
+                                DoubleAnimation animation = new DoubleAnimation(0, -this.Width, TimeSpan.FromMilliseconds(animationDuration));
                                 animation.Completed += HideAnimation_Completed;
                                 ApplyAnimationClock(Window.LeftProperty, animation.CreateClock());
                             };
                         }
                         break;
                     }
-                case NotifyAnimationType.Transparent:
+                case AnimationType.Transparent:
                     {
                         _HideAnimation = delegate ()
                         {
-                            DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(_AnimationDuration));
+                            DoubleAnimation animation = new DoubleAnimation(1, 0, TimeSpan.FromMilliseconds(animationDuration));
                             animation.Completed += HideAnimation_Completed;
                             ApplyAnimationClock(Window.OpacityProperty, animation.CreateClock());
                         };
@@ -139,9 +199,21 @@ namespace D35YNC.Notifications
         }
 
 
-        private void Notification_OnShowed(Window window)
+        private void Notification_OnShowed(Notification notification)
         {
-            _TimeoutTask.Start();
+            new Task(new Action(
+                delegate ()
+                {
+                    if (this._Timeout > 0)
+                    {
+                        Thread.Sleep(this._Timeout);
+                    }
+                    else
+                    {
+                        Thread.Sleep(Notification.DefaultTimeout);
+                    }
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate () { _HideAnimation(); });
+                })).Start();
         }
 
 

@@ -1,13 +1,13 @@
 ﻿/************** 
- * File: D35YNC.Notifications/Enums/NotifyAnimation.cs
+ * File: D35YNC.Notifications/Enums/AnimationType.cs
  * Description: Pop-up notification library
- * D35YNC; 2019
+ * D35YNC 2019-2020
  **************/
 
 
 namespace D35YNC.Notifications.Enums
 {
-    public enum NotifyAnimationType
+    public enum AnimationType
     {
         Slide,
         Transparent

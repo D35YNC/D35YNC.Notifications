@@ -1,13 +1,13 @@
 ﻿/************** 
- * File: D35YNC.Notifications/Enums/NotifyPosition.cs
+ * File: D35YNC.Notifications/Enums/Position.cs
  * Description: Pop-up notification library
- * D35YNC; 2019
+ * D35YNC 2019-2020
  **************/
 
 
 namespace D35YNC.Notifications.Enums
 {
-    public enum NotifyPosition
+    public enum Position
     {
         TopLeft,
         TopRight,

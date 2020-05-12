@@ -32,43 +32,43 @@
       </Delegate>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>oEAIAAAAAkAQAAAAAggAAAAAAAAAAAAABAAAABAAAAA=</HashCode>
+      <HashCode>oEAIABAAAkAQAAQQAggAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
       <FileName>Notification.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="D35YNC.Notifications.NotificationsController">
     <Position X="0.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>ABQAAAAAIAAgAAAAAAAAgBAACAACAAAYQAABAAAABAI=</HashCode>
+      <HashCode>ABQAAAAAIAAgAAAAAAAAgAABCAAAAAAQQAABAQAABAI=</HashCode>
       <FileName>NotificationsController.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="D35YNC.Notifications.Settings.NotificationBehavior">
-    <Position X="8" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
-      <FileName>Settings\NotificationBehavior.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="D35YNC.Notifications.Settings.NotificationMarkup">
+  <Class Name="D35YNC.Notifications.Settings.Markup">
     <Position X="9.75" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEBAAAAAAAAAAAAEAAAAAAABACAAACBIAAABA=</HashCode>
-      <FileName>Settings\NotificationMarkup.cs</FileName>
+      <FileName>Settings\Markup.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="D35YNC.Notifications.Enums.NotifyAnimationType">
-    <Position X="8" Y="3" Width="1.5" />
+  <Class Name="D35YNC.Notifications.Settings.Behavior">
+    <Position X="7.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Settings\Behavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="D35YNC.Notifications.Enums.AnimationType">
+    <Position X="7.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
-      <FileName>Enums\NotifyAnimationType.cs</FileName>
+      <FileName>Enums\AnimationType.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="D35YNC.Notifications.Enums.NotifyPosition">
-    <Position X="8" Y="4.25" Width="1.5" />
+  <Enum Name="D35YNC.Notifications.Enums.Position">
+    <Position X="7.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAIAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
-      <FileName>Enums\NotifyPosition.cs</FileName>
+      <FileName>Enums\Position.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

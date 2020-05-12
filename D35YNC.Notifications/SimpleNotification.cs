@@ -1,7 +1,7 @@
 ﻿/************** 
  * File: D35YNC.Notifications/SimpleNotification.cs
  * Description: Pop-up notification library
- * D35YNC; 2019 - 2020
+ * D35YNC 2019 - 2020
  **************/
 
 
@@ -14,14 +14,17 @@ using System.Windows.Media;
 
 namespace D35YNC.Notifications
 {
-    /// <summary>Обычное окно. Заголовок и текст</summary>
     internal class SimpleNotification : Notification
     {
-        /// <summary> Заголовок этого уведомления. </summary>
+        /// <summary>
+        /// Заголовок этого уведомления
+        /// </summary>
         public string Header;
 
 
-        /// <summary>Текст этого уведомления</summary>
+        /// <summary>
+        /// Текст этого уведомления
+        /// </summary>
         public string Text;
 
 
@@ -33,8 +36,9 @@ namespace D35YNC.Notifications
         private StackPanel _DividingLine;
         #endregion
         
+
         //НАГРОМОЖДЕНИЕ КАЛА
-        public SimpleNotification(string header, string text, NotificationMarkup marking, int timeout,
+        public SimpleNotification(string header, string text, Markup marking, int timeout,
             int animDuration, SolidColorBrush foreground, SolidColorBrush background) : base(timeout, animDuration)
         {
             Header = header;
@@ -44,7 +48,7 @@ namespace D35YNC.Notifications
         }
 
 
-        private void InitComponents(NotificationMarkup marking, SolidColorBrush foreground, SolidColorBrush background)
+        private void InitComponents(Markup marking, SolidColorBrush foreground, SolidColorBrush background)
         {
             #region Window initialization
             this.WindowStyle = WindowStyle.None;
