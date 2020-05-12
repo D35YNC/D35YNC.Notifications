@@ -1,4 +1,4 @@
-# D35YNC.Notifications<Version. 1.2.2>
+# D35YNC.Notifications<Version. 1.2.3>
 
 # README.MD is Outdated, the update is not coming soon//smile)0
 
@@ -168,8 +168,8 @@ _____
 <a name="Changes_RU"/>
 
 Version 1.2.3:
+  * Много улучшений кода.
   * Багфиксы.
-  * Улучшения кода.
 
 Version 1.2.2:
   * Полный баг-фикс в Config.Style.AutoHeight.
@@ -203,7 +203,7 @@ Version 1.0:
 
 Version 1.2.3:
   * Some bug fixes.
-  * Code improvements.
+  * BiG code improvements.
 
 Version 1.2.2:
   * Completely fixed bug in Config.Style.AutoHeight.
