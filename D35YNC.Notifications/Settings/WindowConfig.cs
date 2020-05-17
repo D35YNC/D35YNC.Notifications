@@ -6,11 +6,27 @@
 
 using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace D35YNC.Notifications.Settings
 {
-    public class Markup
+    /// <summary>
+    /// Конфигурация для <see cref="D35YNC.Notifications.SimpleNotification"/>
+    /// </summary>
+    public class WindowConfig
     {
+        /// <summary>
+        /// Цвет текста и контура
+        /// </summary>
+        public SolidColorBrush ForegroundColor = new SolidColorBrush(Colors.Black);
+
+
+        /// <summary>
+        /// Цвет фона
+        /// </summary>
+        public SolidColorBrush BackgroundColor = new SolidColorBrush(Colors.White);
+
+
         /// <summary>
         /// Автоматическая установка высоты с учетом содержимого
         /// </summary>
@@ -69,13 +85,13 @@ namespace D35YNC.Notifications.Settings
         /// <summary>
         /// Высота окна
         /// </summary>
-        public int Height 
+        public int Height
         {
-            get 
+            get
             {
                 return _Height;
             }
-            set 
+            set
             {
                 if (value > 0)
                 {
@@ -92,7 +108,7 @@ namespace D35YNC.Notifications.Settings
         /// <summary>
         /// Ширина окна
         /// </summary>
-        public int Width 
+        public int Width
         {
             get
             {

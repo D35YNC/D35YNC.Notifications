@@ -17,10 +17,10 @@ namespace Demo
         {
             InitializeComponent();
             
-            NotifyController = new NotificationsController();
+            NotifyController = new NotificationsController(true);
             
-            NotifyController.ForegroundColor = new SolidColorBrush(Colors.Lime);
-            NotifyController.BackgroundColor = new SolidColorBrush(Colors.Black);
+            NotifyController.Config.ForegroundColor = new SolidColorBrush(Colors.Lime);
+            NotifyController.Config.BackgroundColor = new SolidColorBrush(Colors.Black);
             
             Behavior.ShowAnimationType = AnimationType.Slide;
         }

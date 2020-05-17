@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>D35YNC.Notifications</name>
+  </assembly>
+  <members>
+    <member name="T:D35YNC.Notifications.Settings.Behavior">
+      <summary>
+Detects the location and animation of Windows
+</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.Settings.Behavior.Position">
+      <summary>
+Location of notifications on the screen
+</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.Settings.Behavior.ShowAnimationType">
+      <summary>
+Type of notification opening animation
+</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.Settings.Behavior.HideAnimationType">
+      <summary>
+Type of notification closing animation
+</summary>
+    </member>
+    <member name="T:D35YNC.Notifications.Settings.WindowConfig">
+      <summary>
+Configuration for <see cref="T:D35YNC.Notifications.SimpleNotification"/>
+</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.Settings.WindowConfig.ForegroundColor">
+      <summary>
+Text and outline color
+</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.Settings.WindowConfig.BackgroundColor">
+      <summary>
+Background color
+</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.Settings.WindowConfig.AutoHeight">
+      <summary>
+Automatic height adjustment based on content
+</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.Settings.WindowConfig.Roundcorners">
+      <summary>
+Round the corners?
+</summary>
+    </member>
+    <member name="P:D35YNC.Notifications.Settings.WindowConfig.CornerRadius">
+      <summary>
+The fillet radius
+</summary>
+    </member>
+    <member name="M:D35YNC.Notifications.Settings.WindowConfig.SetCornerRadius(System.Double)">
+      <summary>
+Sets the radius for rounding corners
+</summary>
+      <param name="uniformRadius">Radius for all corners</param>
+    </member>
+    <member name="M:D35YNC.Notifications.Settings.WindowConfig.SetCornerRadius(System.Double,System.Double,System.Double,System.Double)">
+      <summary>
+Sets the radius for rounding corners
+</summary>
+      <param name="topLeft">Radius for the upper-left corner</param>
+      <param name="topRight">Radius for the upper-right corner</param>
+      <param name="bottomRight">Radius for the lower right corner</param>
+      <param name="bottomLeft">Radius for the lower-left corner</param>
+    </member>
+    <member name="P:D35YNC.Notifications.Settings.WindowConfig.Height">
+      <summary>
+Window height
+</summary>
+    </member>
+    <member name="P:D35YNC.Notifications.Settings.WindowConfig.Width">
+      <summary>
+Window width
+</summary>
+    </member>
+    <member name="T:D35YNC.Notifications.NotificationsController">
+      <summary>
+Notification controller. Creates, displays, and closes notifications.
+</summary>
+    </member>
+    <member name="P:D35YNC.Notifications.NotificationsController.Config">
+      <summary>
+Configuration for <see cref="T:D35YNC.Notifications.SimpleNotification"/>
+</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.NotificationsController.ReserveList">
+      <summary>
+Inverts the order of notifications on the screen
+</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.NotificationsController.WindowsPadding">
+      <summary>Vertical distance between Windows</summary>
+    </member>
+    <member name="F:D35YNC.Notifications.NotificationsController.MaxNotifyCount">
+      <summary>Maximum number of notifications that can be simultaneously displayed on the screen</summary>
+    </member>
+    <member name="M:D35YNC.Notifications.NotificationsController.#ctor(System.Boolean,D35YNC.Notifications.Settings.WindowConfig)">
+      <summary>
+Initializes the controller
+</summary>
+      <param name="useSimpleNoti">true, for use and configuration <see cref="T:D35YNC.Notifications.SimpleNotification"/></param>
+      <param name="customConfig">Custom settings</param>
+    </member>
+    <member name="M:D35YNC.Notifications.NotificationsController.ShowNotification(D35YNC.Notifications.Notification)">
+      <summary>
+Shows the heir from <see cref="T:D35YNC.Notifications.Notification"/>
+</summary>
+    </member>
+    <member name="M:D35YNC.Notifications.NotificationsController.ShowNotification(System.String,System.String,System.Int32,System.Int32)">
+      <summary>
+Shows <see cref="T:D35YNC.Notifications.SimpleNotification"/> with the specified parameters
+</summary>
+      <param name="header">notification Header</param>
+      <param name="text">Notification text</param>
+      <param name="timeout">notification Timeout (ms)</param>
+      <param name="animDuration">animation Duration (ms)</param>
+    </member>
+    <member name="M:D35YNC.Notifications.NotificationsController.SetDefaultTimeout(System.Int32)">
+      <summary>
+Sets a new timeout value for <see cref="T:D35YNC.Notifications.Notification"/>
+</summary>
+      <param name="newValue">ms</param>
+    </member>
+    <member name="M:D35YNC.Notifications.NotificationsController.SetDefaultAnimDuration(System.Int32)">
+      <summary>
+Sets a new animation duration value for <see cref="T:D35YNC.Notifications.Notification"/>
+</summary>
+      <param name="newValue">ms</param>
+    </member>
+    <member name="M:D35YNC.Notifications.NotificationsController.CloseAll">
+      <summary>
+Closes all active notifications
+</summary>
+    </member>
+    <member name="E:D35YNC.Notifications.Notification.OnShowed">
+      <summary>
+Occurs after the window appearance animation ends
+</summary>
+    </member>
+    <member name="E:D35YNC.Notifications.Notification.OnHided">
+      <summary>
+Occurs after the end of the window closing animation
+</summary>
+    </member>
+    <member name="P:D35YNC.Notifications.Notification.DefaultTimeout">
+      <summary>
+Standard timeout for <see cref="T:D35YNC.Notifications.Notification"/>
+</summary>
+    </member>
+    <member name="P:D35YNC.Notifications.Notification.DefaultAnimDuration">
+      <summary>
+The standard duration of the animation for the <see cref="T:D35YNC.Notifications.Notification"/>
+</summary>
+    </member>
+    <member name="M:D35YNC.Notifications.Notification.#ctor(System.Int32,System.Int32)">
+      <summary>
+Starts to initialize the <see cref="T:System.Windows.Window"/> and animations
+</summary>
+      <param name="timeout">ms</param>
+      <param name="animDuration">ms</param>
+    </member>
+  </members>
+</doc>

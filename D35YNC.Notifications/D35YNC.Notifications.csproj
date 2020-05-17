@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Settings\Behavior.cs" />
-    <Compile Include="Settings\Markup.cs" />
+    <Compile Include="Settings\WindowConfig.cs" />
     <Compile Include="Enums\AnimationType.cs" />
     <Compile Include="Enums\Position.cs" />
     <Compile Include="NotificationsController.cs" />

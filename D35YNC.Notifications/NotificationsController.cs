@@ -10,54 +10,83 @@ using D35YNC.Notifications.Settings;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Media;
 
 namespace D35YNC.Notifications
 {
+    /// <summary>
+    /// Контроллер уведомлений. Создает, показывает и закрывает уведомления.
+    /// </summary>
     public class NotificationsController
     {
-        // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
-        public Markup Markup;
+        /// <summary>
+        /// Конфигурация для <see cref="D35YNC.Notifications.SimpleNotification"/>
+        /// </summary>
+        public WindowConfig Config 
+        {
+            get
+            {
+                if (_CanUseConfig)
+                {
+                    return _WindowConfig;
+                }
+                else
+                {
+                    throw new Exception("Can't use config");
+                }                
+            }
+            set
+            {
+                if (_CanUseConfig)
+                {
+                    if (value != null)
+                    {
+                        _WindowConfig = value;
+                    }
+                    else
+                    {
+                        throw new Exception("Value is null");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Can't use config");
+                }
+            }
+        }
+        
 
-        // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
-        public SolidColorBrush ForegroundColor;
-
-        // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
-        public SolidColorBrush BackgroundColor;
-
-        // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
-        public bool ReserveList = true;
-
-        // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
+        /// <summary>
+        /// Инвертирует порядок уведомлений на экране
+        /// </summary>
+        public bool ReserveList = false;
+        
         /// <summary>Вертикальное расстояние между окнами</summary>
         public int WindowsPadding = 5;
-
-        // ОСТАВИТЬ ТУТ ИЛИ УБРАТЬ
+        
         /// <summary>Максимальное количество уведомлений, которые могут одновременно находиться на экране</summary>
         public int MaxNotifyCount = 5;
 
-
+        private WindowConfig _WindowConfig;
         private readonly List<Notification> _Notifications;
-
-        
-        /// <summary>
-        /// Инициализирует контроллер со стандартными параметрами
-        /// </summary>
-        public NotificationsController()
-        {
-            Markup = new Markup();
-            _Notifications = new List<Notification>();
-        }
-
+        private readonly bool _CanUseConfig;
 
         /// <summary>
-        /// Инициализирует контроллер с кастомными параметрами
+        /// Инициализирует контроллер
         /// </summary>
-        /// <param name="customMarkup"></param>
-        public NotificationsController(Markup customMarkup)
+        /// <param name="useSimpleNoti">true, для использования и настройки <see cref="D35YNC.Notifications.SimpleNotification"/></param>
+        /// <param name="customConfig">Кастомные настройки</param>
+        public NotificationsController(bool useSimpleNoti, WindowConfig customConfig = null)
         {
-            Markup = customMarkup ?? throw new Exception("The value cannot be equal to null");
             _Notifications = new List<Notification>();
+            if (useSimpleNoti)
+            {
+                Config = customConfig ?? new WindowConfig();
+                _CanUseConfig = true;
+            }
+            else
+            {
+                _CanUseConfig = false;
+            }
         }
 
 
@@ -80,7 +109,14 @@ namespace D35YNC.Notifications
         /// <param name="animDuration">Длительность анимации (ms)</param>
         public void ShowNotification(string header, string text, int timeout = -1, int animDuration = -1)
         {
-            ShowNotification(new SimpleNotification(header, text, Markup, timeout, animDuration, ForegroundColor, BackgroundColor));
+            if (_CanUseConfig)
+            {
+                ShowNotification(new SimpleNotification(header, text, Config, timeout, animDuration));
+            }
+            else
+            {
+                throw new Exception("Сan't initialize the window without configuration");
+            }
         }
 
 
@@ -128,8 +164,8 @@ namespace D35YNC.Notifications
             }
             _Notifications.Clear();
         }
-        
-        
+
+
         private void RegisterNotify(Notification window)
         {
             if (_Notifications.Count >= MaxNotifyCount)
@@ -152,8 +188,8 @@ namespace D35YNC.Notifications
                 UpdateWindowsPos();
             }
         }
-        
-        
+
+
         private void UnregisterNotify(Notification window)
         {
             if (_Notifications.Contains(window))
@@ -164,7 +200,7 @@ namespace D35YNC.Notifications
             }
         }
 
-        
+
         private void UpdateWindowsPos()
         {
             switch (Behavior.Position)

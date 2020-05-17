@@ -8,6 +8,9 @@ using D35YNC.Notifications.Enums;
 
 namespace D35YNC.Notifications.Settings
 {
+    /// <summary>
+    /// Определяет местоположение и анимации окон
+    /// </summary>
     public static class Behavior
     {
         /// <summary>

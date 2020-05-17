@@ -38,9 +38,9 @@ namespace D35YNC.Notifications
         /// <summary>
         /// Стандартный таймаут для <see cref="D35YNC.Notifications.Notification"/>
         /// </summary>
-        public static int DefaultTimeout 
+        public static int DefaultTimeout
         {
-            get 
+            get
             {
                 return _DefaultTimeout;
             }
@@ -85,7 +85,7 @@ namespace D35YNC.Notifications
 
         private static int _DefaultTimeout = 3000;
         private static int _DefaultAnimDuration = 300;
-        
+
         private delegate void ShowAnimationDelegate();
         private delegate void HideAnimationDelegate();
 
@@ -116,7 +116,7 @@ namespace D35YNC.Notifications
             {
                 animDuration = DefaultAnimDuration;
             }
-            
+
             InitAnimations(animDuration);
         }
 

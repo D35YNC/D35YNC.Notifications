@@ -7,6 +7,7 @@
 
 
 using D35YNC.Notifications.Settings;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -16,17 +17,8 @@ namespace D35YNC.Notifications
 {
     internal class SimpleNotification : Notification
     {
-        /// <summary>
-        /// Заголовок этого уведомления
-        /// </summary>
         public string Header;
-
-
-        /// <summary>
-        /// Текст этого уведомления
-        /// </summary>
         public string Text;
-
 
         #region Components
         private Border _Border;
@@ -35,21 +27,24 @@ namespace D35YNC.Notifications
         private StackPanel _StackPanel;
         private StackPanel _DividingLine;
         #endregion
-        
 
-        //НАГРОМОЖДЕНИЕ КАЛА
-        public SimpleNotification(string header, string text, Markup marking, int timeout,
-            int animDuration, SolidColorBrush foreground, SolidColorBrush background) : base(timeout, animDuration)
+
+        public SimpleNotification(string header, string text, WindowConfig marking, int timeout, int animDuration) : base(timeout, animDuration)
         {
             Header = header;
             Text = text;
 
-            InitComponents(marking, foreground, background);
+            InitComponents(marking);
         }
 
 
-        private void InitComponents(Markup marking, SolidColorBrush foreground, SolidColorBrush background)
+        private void InitComponents(WindowConfig markup)
         {
+            if (markup == null)
+            {
+                throw new Exception("Window cannot be initialized");
+            }
+
             #region Window initialization
             this.WindowStyle = WindowStyle.None;
             this.ResizeMode = ResizeMode.NoResize;
@@ -60,9 +55,9 @@ namespace D35YNC.Notifications
             this.Focusable = false;
             this.Loaded += Window_Loaded;
             this.MaxWidth = 300;
-            this.Width = marking.Width;
-            this.Height = marking.Height;
-            if (marking.AutoHeight)
+            this.Width = markup.Width;
+            this.Height = markup.Height;
+            if (markup.AutoHeight)
             {
                 this.SizeToContent = SizeToContent.Height;
             }
@@ -72,28 +67,28 @@ namespace D35YNC.Notifications
             _Border = new Border
             {
                 BorderThickness = new Thickness(1),
-                CornerRadius = marking.CornerRadius,
-                BorderBrush = foreground,
-                Background = background,
+                CornerRadius = markup.CornerRadius,
+                BorderBrush = markup.ForegroundColor,
+                Background = markup.BackgroundColor,
             };
 
             _HeaderBlock = new TextBlock
             {
                 Margin = new Thickness(10),
-                Foreground = foreground,
+                Foreground = markup.ForegroundColor,
                 FontSize = 25
             };
 
             _DividingLine = new StackPanel
             {
-                Background = foreground,
+                Background = markup.ForegroundColor,
                 Height = 1,
             };
 
             _TextBlock = new TextBlock
             {
                 Margin = new Thickness(10),
-                Foreground = foreground,
+                Foreground = markup.ForegroundColor,
                 FontSize = 15,
                 TextWrapping = TextWrapping.Wrap
             };
