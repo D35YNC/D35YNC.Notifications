@@ -1,7 +1,5 @@
 # D35YNC.Notifications<Version. 1.2.3>
 
-# README.MD is Outdated, the update is not coming soon//smile)0
-
 Простая (почти) библиотека pop-up уведомлений.
 
 Simple pop-up notification library. [EN](#DescriptionEN)
@@ -15,36 +13,20 @@ _____
 
 ![Диаграмма](https://github.com/D35YNC/D35YNC.Notifications/blob/master/D35YNC.Notifications/Diagram.png)
 
-Файл                              | Содержание
-----------------------------------|----------------------------
-./**NotifyController.cs**         | Контроллер. По факту ядро
-./Config/**NotifyConfig.cs**      | Конфиги уведомлений
-./Config/**NotifyStyle.cs**       | Стили уведомлений
-./Config/**NotifyBehavior.cs**    | Поведение уведомлений
-./Enums/**NotifyPosition.cs**     | Положения уведомлений
-./Enums/**NotifyAnimaionType.cs** | Анимации уведомлений
-./Window/**INotifyWindow.cs**     | Интерфейс окна уведомления
-./Window/**NotifyWindow.cs**      | Логика уведомления
+Файл                             | Содержание
+---------------------------------|----------------------------
+./**Notification.cs**            | Абстрактный класс уведомления. Нужен для создания пользовательских окон.  
+./**NotificationsController.cs** | Контроллер. Создает, показывает и закрывает уведомления.  
+./**SimpleNotification.cs**      | Обычное уведомление. Заголовок, текст.  
+./Enums/**AnimationType.cs**     | Типы анимаций.  
+./Enums/**Position.cs**          | Позиции окон на экране.  
+./Settings/**Behavior.cs**       | Поведение уведомлений на экране.  
+./Settings/**WindowConfig.cs**   | Конфигурация для SimpleNotification.  
 
 **Установка**
 
-  * ~~NuGet: Install-Package D35YNC.Notifications -Version 1.2.2~~
+  * NuGet: Install-Package D35YNC.Notifications -Version 1.2.3
   * Или добавь в свой проект папку "D35YNC.Notifications".
-
-**Использование**
-
-Из диаграммы видно, что NotifyController имеет 2 перегрузки Метода ShowNotify(..)
-```C#
-public void ShowNotify(Window window) {...}
-public void ShowNotify(string header, string text, int timeout) {...}
-```
-В первом случае, необходимо проинициализировать окно уведомления NotifyWindow. Обязательно наследование от INotifyWindow.
-Во втором случае, Контроллер сделает это сам.
-
-Инициализация NotifyWindow происходит так:
-```C#
-new NotifyWindow(NotifyStyle, NotifyBehavior) { Header.., Text.., Timeout.., AnimationTimeout...};
-```
 
 Простой пример:
 ```C#
@@ -84,6 +66,8 @@ new NotifyWindow(NotifyStyle, NotifyBehavior) { Header.., Text.., Timeout.., Ani
   }
 ```
 
+Подробнее обо всех функциях в ![./docs/func_ru.md](https://github.com/D35YNC/D35YNC.Notifications/blob/master/D35YNC.Notifications/docs/func_ru.md)
+
 _____
 ## `EN`
 <a name="DescriptionEN"/>
@@ -92,36 +76,21 @@ _____
 
 **Contents**
 
-File                           |Content
--------------------------------|--------------------------------------------------
-./**NotifyController.cs**      |Controller. In fact it's the core.
-./Config/**NotifyConfig.cs**   |Configs of notifications
-./Config/**NotifyStyle.cs**    |Notifications style
-./Config/**NotifyBehavior.cs** |Notifications behavior
-./Enums/**NotifyPosition.cs**  |Notifications positions
-./Enums/**NotifyAnimaion.cs**  |Notifications animations
-./Window/**INotifyWindow.cs**  |Interface of popup window
-./Window/**NotifyWindow.cs**   |Popup window logic
+File                             | Content
+---------------------------------|----------------------------
+./**Notification.cs**            | Abstract notification class. Needed for creating custom Windows.  
+./**NotificationsController.cs** | Controller. Creates, displays, and closes notifications.  
+./**SimpleNotification.cs**      | A normal notification. Title, text.  
+./Enums/**AnimationType.cs**     | Animations types.  
+./Enums/**Position.cs**          | Window positions on the screen.  
+./Settings/**Behavior.cs**       | Behavior of notifications on the screen.  
+./Settings/**WindowConfig.cs**   | Configuration for SimpleNotification.  
 
 **Installation**
 
-  * ~~NuGet: Install-Package D35YNC.Notifications -Version 1.2.2~~
+  * NuGet: Install-Package D35YNC.Notifications -Version 1.2.3
   * Or add folder "D35YNC.Notifications" to your project
-  
-**Usage**
 
-NotifyController has 2 overloads of the Method ShowNotify(..)
-```C#
-public void ShowNotify(Window window);
-public void ShowNotify(int type, string text);
-```
-In the first case, you need to initialize the Notify Window. Inheritance from INotifWindow is required.
-In the second case, the Controller will do it itself.
-
-Initialization of NotifyWindow occurs as follows:
-```C#
-new NotifyWindow(NotifyStyle, NotifyBehavior) { Header.., Text.., Timeout.., AnimationTimeout...};
-```
 
 Simple example:
 ```C#
@@ -160,6 +129,8 @@ Simple example:
     NotifyController.CloseAll();
   }
 ```
+
+Learn more about all functions in ![./docs/func_en.md](https://github.com/D35YNC/D35YNC.Notifications/blob/master/D35YNC.Notifications/docs/func_en.md)
 
 _____
 ## **Изменения | Changes**
