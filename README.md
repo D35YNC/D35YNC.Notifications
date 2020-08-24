@@ -66,7 +66,7 @@ _____
   }
 ```
 
-Подробнее обо всех функциях в ![./docs/func_ru.md](https://github.com/D35YNC/D35YNC.Notifications/blob/master/D35YNC.Notifications/docs/func_ru.md)
+Подробнее обо всех функциях в ![./docs/func_ru.md](https://github.com/D35YNC/D35YNC.Notifications/blob/master/docs/func_ru.md)
 
 _____
 ## `EN`
@@ -130,7 +130,7 @@ Simple example:
   }
 ```
 
-Learn more about all functions in ![./docs/func_en.md](https://github.com/D35YNC/D35YNC.Notifications/blob/master/D35YNC.Notifications/docs/func_en.md)
+Learn more about all functions in ![./docs/func_en.md](https://github.com/D35YNC/D35YNC.Notifications/blob/master/docs/func_en.md)
 
 _____
 ## **Изменения | Changes**
