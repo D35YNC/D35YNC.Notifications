@@ -1,4 +1,4 @@
-# D35YNC.Notifications<Version. 1.2.3>
+# D35YNC.Notifications [<Version. 1.2.3>](https://github.com/D35YNC/D35YNC.Notifications/releases/tag/1.2.3)
 
 Простая (почти) библиотека pop-up уведомлений.
 
