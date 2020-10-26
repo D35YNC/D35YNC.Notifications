@@ -26,7 +26,7 @@ _____
 **Установка**
 
   * NuGet: Install-Package D35YNC.Notifications -Version 1.2.3
-  * Или добавь в свой проект папку "D35YNC.Notifications".
+  * Или добавь в свой проект папку "[D35YNC.Notifications](https://github.com/D35YNC/D35YNC.Notifications/releases/download/1.2.3/D35YNC.Notifications.zip)".
 
 Простой пример:
 ```C#
@@ -89,7 +89,7 @@ File                             | Content
 **Installation**
 
   * NuGet: Install-Package D35YNC.Notifications -Version 1.2.3
-  * Or add folder "D35YNC.Notifications" to your project
+  * Or add folder "[D35YNC.Notifications](https://github.com/D35YNC/D35YNC.Notifications/releases/download/1.2.3/D35YNC.Notifications.zip)" to your project.
 
 
 Simple example:
